@@ -1,0 +1,16 @@
+bibutils.Rproj
+DESCRIPTION
+intex.txt
+man
+NAMESPACE
+R
+
+./man:
+hello.Rd
+
+./R:
+bib_entry_to_tibble.R
+bib_extract_field.R
+bib_extract_header.R
+bib_read_entry.R
+hello.R
