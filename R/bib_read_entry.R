@@ -16,7 +16,7 @@
 
 bib_read_entry <- function(bib_file, entry = 1) {
   if (!file.exists(bib_file)) {
-    stop("Arquvo .bib não encontrado: ", bib_file)
+    stop("Arquvo .bib nao encontrado: ", bib_file)
   }
 
   lines <- readLines(bib_file, warn = FALSE, encoding = "UTF-8")
@@ -36,18 +36,18 @@ bib_read_entry <- function(bib_file, entry = 1) {
     ))
 
     if (length(hit) == 0) {
-      stop("Chave BibTeX não encontrada: ", entry)
+      stop("Chave BibTeX nao encontrada: ", entry)
     }
 
     return(entries[[hit[1]]])
   }
 
   if (!is.numeric(entry) || length(entry) != 1 || is.na(entry)) {
-    stop("`entry` deve ser um índice numérico ou uma chave BibTeX.")
+    stop("`entry` deve ser um indice numerico ou uma chave BibTeX.")
   }
 
   if (entry < 1 || entry > length(entries)) {
-    stop("Índice de entrada inválido.")
+    stop("Indice de entrada invalido.")
   }
 
   entries[[entry]]

@@ -3,7 +3,7 @@
 #' Reads a BibTeX file and returns a single entry either by numeric index
 #' or by BibTeX key.
 #'
-#' @param bib_file Path to a `.bib` file.
+#' @param entry_text Character string with one BibTeX entry.
 #'
 #' @return A character string containing the raw BibTeX entry.
 #' @export

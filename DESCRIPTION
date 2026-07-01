@@ -1,7 +1,7 @@
 Package: bibutils
 Type: Package
 Title: What the Package Does (Title Case)
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: c(
     person(
       "Jane", "Doe",
@@ -11,7 +11,11 @@ Authors@R: c(
   )
 Description: More about what it does (maybe more than one line).
     Continuation lines should be indented.
-License: What license is it under?
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Config/roxygen2/version: 8.0.0
+Imports:
+    purrr,
+    stringr,
+    tibble

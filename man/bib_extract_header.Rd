@@ -7,7 +7,7 @@
 bib_extract_header(entry_text)
 }
 \arguments{
-\item{bib_file}{Path to a `.bib` file.}
+\item{entry_text}{Character string with one BibTeX entry.}
 }
 \value{
 A character string containing the raw BibTeX entry.

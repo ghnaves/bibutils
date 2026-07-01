@@ -1,54 +1,42 @@
-#' Create a Short Citation
-#'
-#' Generates a short author--year citation from a BibTeX author field and
-#' publication year. The function extracts the first author (or institution)
-#' and returns a citation in the format `"Author (Year)"`.
+#' Create a short in-text citation from BibTeX author and year.
 #'
 #' @param author A character string containing the BibTeX `author` field.
-#'   Multiple authors should be separated by `" and "`, following the BibTeX
-#'   convention.
+#'   Multiple authors may be separated by `" and "`, `" e "`, or `" & "`.
 #' @param source_year An integer or character representing the publication
 #'   year.
 #'
-#' @return
-#' A character string containing the short citation. Returns `NA_character_`
-#' if either `author` or `source_year` is missing.
-#'
-#' @details
-#' The function assumes that the `author` field follows the BibTeX format.
-#' Only the first author is used in the citation. For personal names written
-#' as `"Surname, Given"` the surname is extracted. Institutional authors
-#' (e.g., `"IBGE"` or `"United Nations"`) are returned unchanged.
-#'
-#' @examples
-#' bib_make_citation_short(
-#'   author = "United Nations",
-#'   source_year = 2024
-#' )
-#' # "United Nations (2024)"
-#'
-#' bib_make_citation_short(
-#'   author = "Smith, John and Doe, Jane",
-#'   source_year = 2022
-#' )
-#' # "Smith (2022)"
+#' @return A character string containing a short citation in the form:
+#'   `"Silva (2020)"`, `"Silva & Souza (2020)"`,
+#'   `"Silva, Souza & Pereira (2020)"`, or `"Silva et al. (2020)"`.
 #'
 #' @export
 bib_make_citation_short <- function(author, source_year) {
 
-  if (is.na(author) || is.na(source_year))
+  if (is.na(author) || is.na(source_year)) {
     return(NA_character_)
+  }
 
-  first_author <- stringr::str_split(
+  authors <- stringr::str_split(
     author,
-    "\\s+and\\s+"
-  )[[1]][1]
+    "\\s+(?:and|e|&)\\s+"
+  )[[1]] |>
+    stringr::str_squish()
 
-  surname <- first_author |>
-    stringr::str_squish() |>
+  surnames <- authors |>
     stringr::str_replace(",.*$", "") |>
-    stringr::str_split("\\s+") |>
-    purrr::pluck(1)
+    purrr::map_chr(~ stringr::str_split(.x, "\\s+")[[1]][1])
 
-  paste0(surname, " (", source_year, ")")
+  citation <- switch(
+    as.character(length(surnames)),
+    "1" = surnames[1],
+    "2" = paste(surnames, collapse = " & "),
+    "3" = paste0(
+      surnames[1], ", ",
+      surnames[2], " & ",
+      surnames[3]
+    ),
+    paste0(surnames[1], " et al.")
+  )
+
+  paste0(citation, " (", source_year, ")")
 }
