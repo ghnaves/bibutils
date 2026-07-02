@@ -22,9 +22,24 @@ bib_make_citation_short <- function(author, source_year) {
   )[[1]] |>
     stringr::str_squish()
 
-  surnames <- authors |>
-    stringr::str_replace(",.*$", "") |>
-    purrr::map_chr(~ stringr::str_split(.x, "\\s+")[[1]][1])
+  surnames <- purrr::map_chr(authors, function(x) {
+
+    x_clean <- x |>
+      stringr::str_remove("^\\{\\{") |>
+      stringr::str_remove("\\}\\}$") |>
+      stringr::str_remove("^\\{") |>
+      stringr::str_remove("\\}$") |>
+      stringr::str_squish()
+
+    if (bib_author_is_literal(x)) {
+      return(x_clean)
+    }
+
+    x_clean |>
+      stringr::str_replace(",.*$", "") |>
+      stringr::str_split("\\s+") |>
+      purrr::pluck(1)
+  })
 
   citation <- switch(
     as.character(length(surnames)),
