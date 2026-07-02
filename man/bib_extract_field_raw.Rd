@@ -32,7 +32,6 @@ example to identify literal institutional authors written as:
 }
 }
 \examples{
-\dontrun{
 entry_text <- "@dataset{ciesin2018,
   author = {{CIESIN Columbia University}},
   title = {Example dataset}
@@ -40,5 +39,5 @@ entry_text <- "@dataset{ciesin2018,
 
 bib_extract_field_raw(entry_text, "author")
 # "{{CIESIN Columbia University}}"
-}
+
 }

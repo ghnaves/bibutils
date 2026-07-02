@@ -26,7 +26,7 @@ BibTeX structure must be preserved.
 }
 \examples{
 \dontrun{
-sample_file = system.file("extdata", "sample_source.bib", package = "bibutils")
+sample_file <- system.file("extdata", "sample_source.bib", package = "bibutils")
 entry_text <- bib_read_entry(sample_file, 1)
 bib_extract_field(entry_text, "title")
 bib_extract_field(entry_text, "author")

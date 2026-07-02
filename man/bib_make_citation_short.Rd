@@ -2,34 +2,19 @@
 % Please edit documentation in R/bib_make_citation_short.R
 \name{bib_make_citation_short}
 \alias{bib_make_citation_short}
-\title{Create a short in-text citation from BibTeX author and year.}
+\title{Create a Short In-text Citation}
 \usage{
-bib_make_citation_short(author, source_year, author_is_literal = FALSE)
+bib_make_citation_short(author, source_year)
 }
 \arguments{
-\item{author}{A character string containing the cleaned BibTeX `author`
-field. Multiple authors may be separated by `" and "`, `" e "`, or
-`" & "`.}
+\item{author}{A character string containing the BibTeX `author` field.}
 
-\item{source_year}{An integer or character representing the publication
-year.}
-
-\item{author_is_literal}{Logical. If `TRUE`, `author` is treated as a
-literal institutional or corporate author and is not reduced to a
-surname. This is useful for BibTeX authors originally protected with
-braces, such as \preformatted{`{CIESIN Columbia University}`}.}
+\item{source_year}{An integer or character representing the publication year.}
 }
 \value{
-A character string containing a short citation in the form:
-  `"Silva (2020)"`, `"Silva & Souza (2020)"`,
-  `"Silva, Souza & Pereira (2020)"`, or `"Silva et al. (2020)"`.
+A character string such as `"Givisiez (2025)"`,
+  `"Givisiez & Oliveira (2025)"`, or `"Olson et al. (2025)"`.
 }
 \description{
-Create a short in-text citation from BibTeX author and year.
-}
-\examples{
-bib_make_citation_short("Silva, João", 2020)
-bib_make_citation_short("Silva, João and Souza, Maria", 2020)
-bib_make_citation_short("CIESIN Columbia University", 2018, author_is_literal = TRUE)
-
+Creates a short author-year citation from a BibTeX author field and year.
 }

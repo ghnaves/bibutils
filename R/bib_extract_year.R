@@ -18,7 +18,7 @@
 bib_extract_year <- function(entry_text, field = "date") {
   x <- bib_extract_field(entry_text, field)
 
-  if (is.na(x) || is.null(x) || !nzchar(x)) {
+  if (is.null(x) || is.na(x) || !nzchar(x)) {
     return(NA_integer_)
   }
 

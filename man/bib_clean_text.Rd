@@ -24,11 +24,11 @@ Therefore, it should not be used when the original BibTeX structure needs
 to be preserved, for example to detect literal institutional authors.
 }
 \examples{
-\dontrun{
+
 bib_clean_text("{{CIESIN Columbia University}}")
 # "CIESIN Columbia University"
 
 bib_clean_text("{World Population Prospects 2024}")
 # "World Population Prospects 2024"
-}
+
 }

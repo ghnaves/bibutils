@@ -28,36 +28,40 @@ bib_entry_to_tibble <- function(bib_file, entry = 1) {
   author_raw <- bib_extract_field_raw(entry_text, "author")
   author <- bib_extract_field(entry_text, "author")
   source_year <- bib_extract_year(entry_text, "date")
+  title <- bib_extract_field(entry_text, "title")
+  publisher <- bib_extract_field(entry_text, "publisher")
+  doi <- bib_extract_field(entry_text, "doi")
+  url <- bib_extract_field(entry_text, "url")
 
   author_is_literal <- bib_author_is_literal(author_raw)
 
   citation_short <- bib_make_citation_short(
-    author = author,
-    source_year = source_year,
-    author_is_literal = author_is_literal
+    author = author_raw,
+    source_year = source_year
   )
 
   citation_full <- bib_make_citation_full(
-    author = author,
+    author = author_raw,
     source_year = source_year,
-    title = bib_extract_field(entry_text, "title"),
-    publisher = bib_extract_field(entry_text, "publisher"),
-    doi = bib_extract_field(entry_text, "doi"),
-    url = bib_extract_field(entry_text, "url")
+    title = title,
+    publisher = publisher,
+    doi = doi,
+    url = url
   )
 
   tibble::tibble(
     source_key = header$source_key,
     source_type = header$source_type,
     bibtex_entry = entry_text,
-    title = bib_extract_field(entry_text, "title"),
+    title = title,
     author = author,
+    author_raw = author_raw,
     author_is_literal = author_is_literal,
-    publisher = bib_extract_field(entry_text, "publisher"),
+    publisher = publisher,
     source_year = source_year,
     source_date = bib_extract_field(entry_text, "date"),
-    doi = bib_extract_field(entry_text, "doi"),
-    url = bib_extract_field(entry_text, "url"),
+    doi = doi,
+    url = url,
     urldate = bib_extract_field(entry_text, "urldate"),
     abstract = bib_extract_field(entry_text, "abstract"),
     keywords = bib_extract_field(entry_text, "keywords"),

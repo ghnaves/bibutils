@@ -23,7 +23,6 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
 #' entry_text <- "@dataset{ciesin2018,
 #'   author = {{CIESIN Columbia University}},
 #'   title = {Example dataset}
@@ -31,7 +30,7 @@
 #'
 #' bib_extract_field_raw(entry_text, "author")
 #' # "{{CIESIN Columbia University}}"
-#' }
+#'
 #' @export
 bib_extract_field_raw <- function(entry_text, field) {
 

@@ -2,47 +2,18 @@
 % Please edit documentation in R/bib_format_author_short.R
 \name{bib_format_author_short}
 \alias{bib_format_author_short}
-\title{Format a Personal Author Name for Short Citations}
+\title{Format Author for Short Citation}
 \usage{
 bib_format_author_short(x)
 }
 \arguments{
-\item{x}{A character string containing one personal author name. Names may
-follow either the BibTeX-style `"Surname, Given names"` format or the
-`"Given names Surname"` format.}
+\item{x}{A character string containing one author.}
 }
 \value{
-A character string formatted as `"Surname, G."` or, when multiple given
-names are available, `"Surname, G. M."`. A one-word name is returned
-unchanged.
+A character string with the surname or literal author name.
 }
 \description{
-Converts a personal author name into a compact surname--initials format for
-use in short citations.
-}
-\details{
-For names containing a comma, the text before the first comma is treated as
-the surname and the text after it as the given names. For names without a
-comma, the final word is treated as the surname and all preceding words are
-converted to initials.
-
-This helper is intended for personal author names only. Institutional or
-corporate authors should be handled separately through
-\code{\link{bib_author_is_literal}}.
-}
-\examples{
-\dontrun{
-bib_format_author_short("Givisiez, Gustavo")
-# "Givisiez, G."
-
-bib_format_author_short("Gustavo Givisiez")
-# "Givisiez, G."
-
-bib_format_author_short("Olson, David M.")
-# "Olson, D. M."
-
-bib_format_author_short("Plato")
-# "Plato"
-}
+Formats one author for a short in-text citation by keeping only the surname,
+or the full literal name for institutional authors.
 }
 \keyword{internal}

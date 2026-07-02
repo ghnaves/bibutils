@@ -48,9 +48,18 @@ bib_make_citation_full <- function(author,
                                    doi = NA_character_,
                                    url = NA_character_) {
 
+  authors <- bib_split_authors(author)
+
+  authors_long <- purrr::map_chr(
+    authors,
+    bib_format_author_long
+  )
+
+  author_text <- paste(authors_long, collapse = "; ")
+
   parts <- c(
-    if (!is.na(author) && nzchar(author)) author else NA_character_,
-    if (!is.na(source_year) && nzchar(source_year)) {
+    if (!is.na(author_text) && nzchar(author_text)) author_text else NA_character_,
+    if (!is.na(source_year) && nzchar(as.character(source_year))) {
       paste0("(", source_year, ").")
     } else {
       NA_character_

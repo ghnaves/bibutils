@@ -44,13 +44,13 @@ bib_extract_header <- function(entry_text) {
 #' to be preserved, for example to detect literal institutional authors.
 #'
 #' @examples
-#' \dontrun{
+#'
 #' bib_clean_text("{{CIESIN Columbia University}}")
 #' # "CIESIN Columbia University"
 #'
 #' bib_clean_text("{World Population Prospects 2024}")
 #' # "World Population Prospects 2024"
-#'}
+#'
 #' @export
 bib_clean_text <- function(x) {
   if (is.null(x) || is.na(x) || !nzchar(trimws(x))) {
