@@ -39,9 +39,8 @@ x <- tibble::tibble(
   title = "World Population Prospects 2024",
   publisher = "United Nations",
   doi = NA_character_,
-  url = "https://population.un.org/wpp/"
+  url = "https://population.un.org/wpp/",
+  author_is_literal = TRUE
 )
-
-bib_get_citations(x)
 
 }

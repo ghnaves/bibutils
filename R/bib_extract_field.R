@@ -1,20 +1,29 @@
-#' Extract a field of a BibTeX entry from a .bib file
+#' Extract a Field from a BibTeX Entry
 #'
-#' Reads a BibTeX file and returns a numeric of the year of publication
-#' for a single entry, either by numeric index
+#' Extracts and cleans the value of a field from a single BibTeX entry.
 #'
-#' @param entry_text a value generate by bib_extract_field function
-#' @param field the name of the field to extract the year from (default: "date").
+#' @param entry_text A character string containing one complete BibTeX entry.
+#' @param field A character string with the name of the BibTeX field to
+#'   extract, such as `"title"`, `"author"`, `"date"`, `"doi"`, or `"url"`.
 #'
-#' @return A integer containing the year
-#' @export
+#' @return
+#' A cleaned character string containing the field value. Returns
+#' `NA_character_` if the field is not found or cannot be parsed.
+#'
+#' @details
+#' This function returns a cleaned value using `bib_clean_text()`. Braces and
+#' external quotes are removed. Use `bib_extract_field_raw()` when the original
+#' BibTeX structure must be preserved.
 #'
 #' @examples
 #' \dontrun{
-#' entry_text = bib_read_entry("data/raw/sample_source.bib", 1)
-#' bib_extract_year(entry_text)
+#' sample_file = system.file("extdata", "sample_source.bib", package = "bibutils")
+#' entry_text <- bib_read_entry(sample_file, 1)
+#' bib_extract_field(entry_text, "title")
+#' bib_extract_field(entry_text, "author")
 #' }
-
+#'
+#' @export
 bib_extract_field <- function(entry_text, field) {
   pattern <- paste0(field, "\\s*=\\s*")
   loc <- regexpr(pattern, entry_text, ignore.case = TRUE, perl = TRUE)

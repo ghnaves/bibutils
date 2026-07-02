@@ -31,10 +31,9 @@
 #'   title = "World Population Prospects 2024",
 #'   publisher = "United Nations",
 #'   doi = NA_character_,
-#'   url = "https://population.un.org/wpp/"
+#'   url = "https://population.un.org/wpp/",
+#'   author_is_literal = TRUE
 #' )
-#'
-#' bib_get_citations(x)
 #'
 #' @export
 bib_get_citations <- function(x) {
@@ -43,7 +42,8 @@ bib_get_citations <- function(x) {
     key = x$source_key,
     short = bib_make_citation_short(
       author = x$author,
-      source_year = x$source_year
+      source_year = x$source_year,
+      author_is_literal = x$author_is_literal
     ),
     full = bib_make_citation_full(
       author = x$author,

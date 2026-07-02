@@ -2,25 +2,25 @@
 % Please edit documentation in R/bib_extract_year.R
 \name{bib_extract_year}
 \alias{bib_extract_year}
-\title{Extract year of a BibTeX entry from a .bib file}
+\title{Extract the Year from a BibTeX Entry}
 \usage{
 bib_extract_year(entry_text, field = "date")
 }
 \arguments{
-\item{entry_text}{a value generate by bib_extract_field function}
+\item{entry_text}{A character string containing one complete BibTeX entry.}
 
-\item{field}{the name of the field to extract the year from (default: "date").}
+\item{field}{A character string with the name of the BibTeX field from
+which the year should be extracted. Defaults to `"date"`.}
 }
 \value{
-A integer containing the year
+An integer containing the extracted year. Returns `NA_integer_` if the field
+is missing, empty, or does not contain a four-digit year.
 }
 \description{
-Reads a BibTeX file and returns a numeric of the year of publication
-for a single entry, either by numeric index
+Extracts the first four-digit year from a date-like field in a BibTeX entry.
 }
 \examples{
-\dontrun{
-entry_text = bib_read_entry("data/raw/sample_source.bib", 1)
+entry_text <- "@dataset{wpp2024, date = {2024-07-01}}"
 bib_extract_year(entry_text)
-}
+
 }

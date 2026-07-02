@@ -1,17 +1,24 @@
-#' Read one BibTeX entry from a .bib file
+#' Extract the Header from a BibTeX Entry
 #'
-#' Reads a BibTeX file and returns a single entry either by numeric index
-#' or by BibTeX key.
+#' Extracts the entry type and citation key from the header of a single
+#' BibTeX entry.
 #'
-#' @param entry_text Character string with one BibTeX entry.
+#' @param entry_text A character string containing one complete BibTeX entry.
 #'
-#' @return A character string containing the raw BibTeX entry.
-#' @export
+#' @return A named list with two elements:
+#' \describe{
+#'   \item{source_type}{The BibTeX entry type, such as `"article"`,
+#'   `"book"`, or `"dataset"`.}
+#'   \item{source_key}{The BibTeX citation key.}
+#' }
 #'
 #' @examples
 #' \dontrun{
-#' bib_extract_header("data/raw/sample_source.bib", 1)
-#' }
+#' entry <- "@dataset{ciesin2018, title = {Example}}"
+#' bib_extract_header(entry)
+#'}
+#'
+#' @export
 bib_extract_header <- function(entry_text) {
   m <- stringr::str_match(entry_text, "^@(\\w+)\\{([^,]+),")
 
@@ -20,7 +27,31 @@ bib_extract_header <- function(entry_text) {
     source_key  = ifelse(is.na(m[, 3]), NA_character_, trimws(m[, 3]))
   )
 }
-
+#' Clean Text Extracted from a BibTeX Field
+#'
+#' Removes external quotes, balanced external braces, remaining internal
+#' braces, and extra whitespace from text extracted from a BibTeX field.
+#'
+#' @param x A character string extracted from a BibTeX field.
+#'
+#' @return A cleaned character string. Returns `NA_character_` for missing,
+#'   empty, or `NULL` input.
+#'
+#' @details
+#' This function is intended to create clean display values from BibTeX
+#' fields. It removes BibTeX structural markers such as external braces.
+#' Therefore, it should not be used when the original BibTeX structure needs
+#' to be preserved, for example to detect literal institutional authors.
+#'
+#' @examples
+#' \dontrun{
+#' bib_clean_text("{{CIESIN Columbia University}}")
+#' # "CIESIN Columbia University"
+#'
+#' bib_clean_text("{World Population Prospects 2024}")
+#' # "World Population Prospects 2024"
+#'}
+#' @export
 bib_clean_text <- function(x) {
   if (is.null(x) || is.na(x) || !nzchar(trimws(x))) {
     return(NA_character_)
@@ -28,12 +59,10 @@ bib_clean_text <- function(x) {
 
   x <- trimws(x)
 
-  # remove aspas externas
   if (startsWith(x, "\"") && endsWith(x, "\"")) {
     x <- substring(x, 2, nchar(x) - 1)
   }
 
-  # remove múltiplas camadas de chaves externas balanceadas
   repeat {
     if (startsWith(x, "{") && endsWith(x, "}")) {
 
@@ -45,7 +74,6 @@ bib_clean_text <- function(x) {
         if (chars[i] == "{") level <- level + 1
         if (chars[i] == "}") level <- level - 1
 
-        # se zerar antes do fim → não é camada externa pura
         if (level == 0 && i < length(chars)) {
           balanced <- FALSE
           break
@@ -64,10 +92,8 @@ bib_clean_text <- function(x) {
     }
   }
 
-  # remove chaves internas restantes
   x <- gsub("[{}]", "", x)
-
-  # normaliza espaços
   x <- gsub("\\s+", " ", x)
+
   trimws(x)
 }

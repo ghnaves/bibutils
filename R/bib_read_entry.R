@@ -1,22 +1,26 @@
-#' Read one BibTeX entry from a .bib file
+#' Read One BibTeX Entry from a .bib File
 #'
-#' Reads a BibTeX file and returns a single entry either by numeric index
-#' or by BibTeX key.
+#' Reads a BibTeX file and returns a single entry, selected either by numeric
+#' index or by BibTeX citation key.
 #'
 #' @param bib_file Path to a `.bib` file.
-#' @param entry Entry index or BibTeX key.
+#' @param entry A numeric index or a character string with the BibTeX citation
+#'   key.
 #'
-#' @return A character string containing the raw BibTeX entry.
-#' @export
+#' @return
+#' A character string containing the raw BibTeX entry.
 #'
 #' @examples
 #' \dontrun{
 #' bib_read_entry("data/raw/sample_source.bib", 1)
+#' bib_read_entry("data/raw/sample_source.bib", "ciesin2018")
 #' }
-
+#'
+#' @export
 bib_read_entry <- function(bib_file, entry = 1) {
+
   if (!file.exists(bib_file)) {
-    stop("Arquvo .bib nao encontrado: ", bib_file)
+    stop("Arquivo .bib nao encontrado: ", bib_file)
   }
 
   lines <- readLines(bib_file, warn = FALSE, encoding = "UTF-8")
@@ -30,15 +34,14 @@ bib_read_entry <- function(bib_file, entry = 1) {
   }
 
   if (is.character(entry)) {
+    entry_escaped <- stringr::str_escape(entry)
     hit <- which(stringr::str_detect(
       entries,
-      paste0("^@\\w+\\{", stringr::fixed(entry), ",")
+      paste0("^@\\w+\\{", entry_escaped, ",")
     ))
-
     if (length(hit) == 0) {
       stop("Chave BibTeX nao encontrada: ", entry)
     }
-
     return(entries[[hit[1]]])
   }
 

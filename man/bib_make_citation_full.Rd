@@ -14,15 +14,16 @@ bib_make_citation_full(
 )
 }
 \arguments{
-\item{author}{A character string containing the BibTeX `author` field.}
+\item{author}{A character string containing the cleaned BibTeX `author`
+field.}
 
 \item{source_year}{An integer or character representing the publication
 year.}
 
 \item{title}{A character string containing the publication title.}
 
-\item{publisher}{An optional character string containing the publisher or
-organization.}
+\item{publisher}{An optional character string containing the publisher,
+institution, or organization responsible for the resource.}
 
 \item{doi}{An optional character string containing the Digital Object
 Identifier (DOI).}
@@ -30,20 +31,19 @@ Identifier (DOI).}
 \item{url}{An optional character string containing the publication URL.}
 }
 \value{
-A character string containing the complete citation. Missing fields are
-omitted from the output.
+A character string containing the complete citation. Missing or
+  empty fields are omitted from the output.
 }
 \description{
 Generates a complete citation string from bibliographic metadata extracted
-from a BibTeX entry. The output is intended for use in metadata, reports,
-or documentation, rather than as a formally formatted reference according
-to a specific citation style (e.g., APA, ABNT, Chicago).
+from a BibTeX entry. The output is intended for metadata, reports, and
+documentation rather than for a formally formatted reference according to a
+specific citation style, such as APA, ABNT, or Chicago.
 }
 \details{
 The function concatenates the available bibliographic fields into a single
-readable citation. It does not attempt to conform to any particular
-bibliographic style, making it suitable for metadata records and internal
-documentation.
+readable citation. It does not attempt to conform to a particular
+bibliographic style.
 }
 \examples{
 bib_make_citation_full(

@@ -9,35 +9,48 @@
 #'
 #' @return
 #' A logical value. Returns `TRUE` when `x` is enclosed in one or two pairs
-#' of curly braces, and `FALSE` otherwise.
+#' of curly braces, `FALSE` otherwise, and `NA` for missing or empty input.
 #'
 #' @details
 #' In BibTeX, braces can be used to preserve institutional or corporate author
 #' names as literal strings. This is particularly useful when an institutional
 #' author contains multiple words and should not be reduced to a surname.
 #'
+#' This function should be applied to raw BibTeX author values, before
+#' cleaning with \code{\link{bib_clean_text}}.
+#'
 #' Both single-brace and double-brace forms are recognized:
 #'
-#' - `"{United Nations}"`
-#' - `"{{CIESIN Columbia University}}"`
+#' - \preformatted{"{United Nations}"}
+#' - \preformatted{"{{CIESIN Columbia University}}"}
 #'
 #' This helper is used internally by \code{\link{bib_make_citation_short}} to
 #' prevent institutional author names from being parsed as personal names.
 #'
 #' @examples
+#' \dontrun{
 #' bib_author_is_literal("{{CIESIN Columbia University}}")
-#' # TRUE
+#' TRUE
 #'
 #' bib_author_is_literal("{United Nations}")
-#' # TRUE
+#' TRUE
 #'
 #' bib_author_is_literal("Smith, John")
 #' # FALSE
-#'
+#' }
 #' @keywords internal
+#'
+#' @export
 bib_author_is_literal <- function(x) {
+
+  if (is.na(x) || !nzchar(stringr::str_squish(x))) {
+    return(NA)
+  }
+
+  x <- stringr::str_squish(x)
+
   stringr::str_detect(
-    stringr::str_squish(x),
-    "^\\{\\{.+\\}\\}$|^\\{.+\\}$"
+    x,
+    "^\\{(?:\\{.*\\}|.*)\\}$"
   )
 }

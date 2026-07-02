@@ -4,14 +4,20 @@
 \alias{bib_make_citation_short}
 \title{Create a short in-text citation from BibTeX author and year.}
 \usage{
-bib_make_citation_short(author, source_year)
+bib_make_citation_short(author, source_year, author_is_literal = FALSE)
 }
 \arguments{
-\item{author}{A character string containing the BibTeX `author` field.
-Multiple authors may be separated by `" and "`, `" e "`, or `" & "`.}
+\item{author}{A character string containing the cleaned BibTeX `author`
+field. Multiple authors may be separated by `" and "`, `" e "`, or
+`" & "`.}
 
 \item{source_year}{An integer or character representing the publication
 year.}
+
+\item{author_is_literal}{Logical. If `TRUE`, `author` is treated as a
+literal institutional or corporate author and is not reduced to a
+surname. This is useful for BibTeX authors originally protected with
+braces, such as \preformatted{`{CIESIN Columbia University}`}.}
 }
 \value{
 A character string containing a short citation in the form:
@@ -20,4 +26,10 @@ A character string containing a short citation in the form:
 }
 \description{
 Create a short in-text citation from BibTeX author and year.
+}
+\examples{
+bib_make_citation_short("Silva, João", 2020)
+bib_make_citation_short("Silva, João and Souza, Maria", 2020)
+bib_make_citation_short("CIESIN Columbia University", 2018, author_is_literal = TRUE)
+
 }

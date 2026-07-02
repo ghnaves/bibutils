@@ -2,22 +2,29 @@
 % Please edit documentation in R/bib_extract_header.R
 \name{bib_extract_header}
 \alias{bib_extract_header}
-\title{Read one BibTeX entry from a .bib file}
+\title{Extract the Header from a BibTeX Entry}
 \usage{
 bib_extract_header(entry_text)
 }
 \arguments{
-\item{entry_text}{Character string with one BibTeX entry.}
+\item{entry_text}{A character string containing one complete BibTeX entry.}
 }
 \value{
-A character string containing the raw BibTeX entry.
+A named list with two elements:
+\describe{
+  \item{source_type}{The BibTeX entry type, such as `"article"`,
+  `"book"`, or `"dataset"`.}
+  \item{source_key}{The BibTeX citation key.}
+}
 }
 \description{
-Reads a BibTeX file and returns a single entry either by numeric index
-or by BibTeX key.
+Extracts the entry type and citation key from the header of a single
+BibTeX entry.
 }
 \examples{
 \dontrun{
-bib_extract_header("data/raw/sample_source.bib", 1)
+entry <- "@dataset{ciesin2018, title = {Example}}"
+bib_extract_header(entry)
 }
+
 }

@@ -2,24 +2,27 @@
 % Please edit documentation in R/bib_read_entry.R
 \name{bib_read_entry}
 \alias{bib_read_entry}
-\title{Read one BibTeX entry from a .bib file}
+\title{Read One BibTeX Entry from a .bib File}
 \usage{
 bib_read_entry(bib_file, entry = 1)
 }
 \arguments{
 \item{bib_file}{Path to a `.bib` file.}
 
-\item{entry}{Entry index or BibTeX key.}
+\item{entry}{A numeric index or a character string with the BibTeX citation
+key.}
 }
 \value{
 A character string containing the raw BibTeX entry.
 }
 \description{
-Reads a BibTeX file and returns a single entry either by numeric index
-or by BibTeX key.
+Reads a BibTeX file and returns a single entry, selected either by numeric
+index or by BibTeX citation key.
 }
 \examples{
 \dontrun{
 bib_read_entry("data/raw/sample_source.bib", 1)
+bib_read_entry("data/raw/sample_source.bib", "ciesin2018")
 }
+
 }

@@ -2,24 +2,32 @@
 % Please edit documentation in R/bib_entry_to_tibble.R
 \name{bib_entry_to_tibble}
 \alias{bib_entry_to_tibble}
-\title{Generate a tibble based on a .bib file}
+\title{Generate a Tibble from a .bib File}
 \usage{
 bib_entry_to_tibble(bib_file, entry = 1)
 }
 \arguments{
 \item{bib_file}{Path to a `.bib` file.}
 
-\item{entry}{Entry index or BibTeX key.}
+\item{entry}{A numeric index or a character string with the BibTeX citation
+key.}
 }
 \value{
-a data frame with a standard set of fields for a single entry
+A one-row tibble containing bibliographic metadata, the raw BibTeX
+  entry, and derived citation strings.
 }
 \description{
-Reads a BibTeX file and returns a data frame with a standard set of fields
-for a single entry, either by numeric index
+Reads a BibTeX file and returns a tibble with standardized bibliographic
+metadata for one entry, selected by numeric index or BibTeX citation key.
+}
+\details{
+The returned tibble preserves the raw BibTeX entry and includes derived
+short and full citation strings.
 }
 \examples{
 \dontrun{
 bib_entry_to_tibble("data/raw/sample_source.bib", 1)
+bib_entry_to_tibble("data/raw/sample_source.bib", "ciesin2018")
 }
+
 }
