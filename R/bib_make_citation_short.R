@@ -40,19 +40,20 @@ bib_make_citation_short <- function(author,
   )[[1]] |>
     stringr::str_squish()
 
-  surnames <- purrr::map_chr(authors, function(x) {
-    x |>
-      stringr::str_replace(",.*$", "") |>
-      stringr::str_squish() |>
-      stringr::str_split("\\s+") |>
-      purrr::pluck(1)
-  })
+  authors_short <- purrr::map_chr(
+    authors,
+    bib_format_author_short
+  )
 
   citation <- dplyr::case_when(
-    length(surnames) == 1 ~ surnames[1],
-    length(surnames) == 2 ~ paste(surnames, collapse = " & "),
-    length(surnames) == 3 ~ paste0(surnames[1], ", ", surnames[2], " & ", surnames[3]),
-    length(surnames) > 3  ~ paste0(surnames[1], " et al."),
+    length(authors_short) == 1 ~ authors_short[1],
+    length(authors_short) == 2 ~ paste(authors_short, collapse = " & "),
+    length(authors_short) == 3 ~ paste0(
+      authors_short[1], ", ",
+      authors_short[2], " & ",
+      authors_short[3]
+    ),
+    length(authors_short) > 3 ~ paste0(authors_short[1], " et al."),
     TRUE ~ NA_character_
   )
 

@@ -51,6 +51,6 @@ bib_author_is_literal <- function(x) {
 
   stringr::str_detect(
     x,
-    "^\\{(?:\\{.*\\}|.*)\\}$"
+    "^\\{\\{.+\\}\\}$"
   )
 }
