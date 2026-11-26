@@ -1,4 +1,4 @@
-# bbutils 0.1.3
+# bibutils 0.1.4
 
 ## New features
 

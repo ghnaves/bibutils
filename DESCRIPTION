@@ -1,20 +1,23 @@
 Package: bibutils
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.3
+Title: bbutils v0.1.4 – BibTeX Metadata and Citation Utilities for R
+Version: 0.1.4
 Authors@R: c(
     person(
-      "Jane", "Doe",
-      email = "jane@example.com",
+      "Gustavo", "Givisiez",
+      email = "gh_naves@id.uff.br",
       role = c("aut", "cre")
     )
   )
-Description: More about what it does (maybe more than one line).
-    Continuation lines should be indented.
+Description: Provides utility functions for processing BibTeX entries,
+    extracting and cleaning bibliographic metadata, handling personal
+    and institutional authors, generating short and full citations,
+    and converting bibliographic records into structured tabular data.
+    Supports reproducible research and automated bibliographic workflows.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Config/roxygen2/version: 8.0.0
+Config/roxygen2/version: 8.1.0
 Imports:
     purrr,
     stringr,
