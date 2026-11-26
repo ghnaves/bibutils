@@ -5,8 +5,6 @@ Utility functions for working with BibTeX metadata and citations in R.
 
 ## Installation
 
-## Installation
-
 ```r
 remotes::install_github("ghnaves/bbutils")
 ``` 
@@ -18,9 +16,10 @@ remotes::install_github("ghnaves/bbutils")
 * Generate short and full citations
 * Utility functions for bibliographic workflows
 
-O pacote `bbutils` contém utilidades bibliográficas para acessar citações padrão 
-bibtext. Ele desenvolvido como apoio a arquitetura de três banco de dados:
+The `bbutils` package provides bibliographic utility functions for 
+processing references and citations in BibTeX format. It was originally 
+developed to support the architecture of three interconnected databases:
 
-- `loc_database`: banco de localidades.
-- `maps_database`: infraestrutura cartográfica.
-- `pop_database`: dados demográficos.
+- `loc_database`: geographic locations database.
+- `maps_database`: cartographic data infrastructure.
+- `pop_database`: demographic data infrastructure.
